@@ -1,4 +1,4 @@
-# RK_137 mirrorbot-workflow
+# mirrorbot-workflow
 
 You can use [this repo](https://github.com/rahulkhatri137/mirrorbot137) as a template
 
