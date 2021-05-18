@@ -1,6 +1,6 @@
-# mirrorbot-workflow
+# RK_137 mirrorbot-workflow
 
-You can use [this repo](https://github.com/lzzy12/python-aria-mirror-bot) as a template
+You can use [this repo](https://github.com/rahulkhatri137/mirrorbot137) as a template
 
 First setup everything then push to your private Repository
 
