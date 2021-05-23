@@ -38,6 +38,7 @@ jobs:
           docker container prune --force || true
           docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfile -t mirror-bot
           docker image ls
+          pip3 install speedtest
 
       - name: running Docker
         timeout-minutes: 340
