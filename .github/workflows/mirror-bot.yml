@@ -25,8 +25,7 @@ jobs:
           git config --global credential.helper store
           echo "https://${GitHubName}:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
 
-      # Cleanup The Actions Workspace Using Custom Composite Run Actions hmm
-      - uses: rokibhasansagar/slimhub_actions@main
+      
 
       - name: Clone The Secret Mirror Repository
         run: |
