@@ -37,8 +37,6 @@ jobs:
           echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
           docker container prune --force || true
           docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfile -t mirror-bot
-          docker image ls
-          pip3 install speedtest-cli
 
       - name: running Docker
         timeout-minutes: 340
