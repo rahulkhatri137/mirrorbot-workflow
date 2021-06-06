@@ -39,6 +39,7 @@ jobs:
           docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfile -t mirror-bot
 
       - name: running bot
+        continue-on-error: true
         timeout-minutes: 340
         run: |
           docker run --privileged --rm -i mirror-bot
