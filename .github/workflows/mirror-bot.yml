@@ -38,9 +38,8 @@ jobs:
           docker container prune --force || true
           docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfile -t mirror-bot
 
-      - name: running Docker
+      - name: running bot
         timeout-minutes: 340
-        continue-on-error: true
         run: |
           docker run --privileged --rm -i mirror-bot
 
