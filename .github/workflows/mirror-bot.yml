@@ -52,6 +52,6 @@ jobs:
           cd loop || exit 1
           echo $(( RANDOM - ( RANDOM % RANDOM ) )) > loop.txt
           git add loop.txt
-          git commit -m "Workflow : Loop at $(date -u +%D-%T%P)"
+          git commit -m "Workflow : Loop"
           git push -q https://${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY} HEAD:main
 
