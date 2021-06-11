@@ -50,8 +50,8 @@ jobs:
           # ${GITHUB_REPOSITORY} is the repo slug which runs this script
           git clone https://${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY} loop
           cd loop || exit 1
-          echo $(( RANDOM - ( RANDOM % RANDOM ) )) > looper.txt
-          git add looper.txt
+          echo $(( RANDOM - ( RANDOM % RANDOM ) )) > loop.txt
+          git add loop.txt
           git commit -m "Workflow : Loop at $(date -u +%D-%T%P)"
           git push -q https://${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY} HEAD:main
 
