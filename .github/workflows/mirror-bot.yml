@@ -7,8 +7,8 @@ on:
   workflow_dispatch:
    
 env:
-  GitHubMail: ${{ secrets.GitHubMail }}
-  GitHubName: ${{ secrets.GitHubName }}
+  GitHubMail: ${{ secrets.GHMAIL }}
+  GitHubName: ${{ secrets.GHUSER }}
 
 jobs:
   debug:
@@ -25,20 +25,18 @@ jobs:
           git config --global credential.helper store
           echo "https://${GitHubName}:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
 
-      
-
-      - name: Clone The Secret Mirror Repository
+      - name: Clone Mirror Repo
         run: |
-          git clone https://${GitHubName}:${{ secrets.GH_TOKEN }}@github.com/${{ secrets.MIRROR_REPOSLUG }} source
+          git clone https://${GitHubName}:${{ secrets.GH_TOKEN }}@github.com/${{ secrets.REPO }} source
 
-      - name: Compile The Mirroring Docker Container
+      - name: Compile Docker
         run: |
           cd source || exit 1
           echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
           docker container prune --force || true
           docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfile -t mirror-bot
 
-      - name: running bot
+      - name: Run bot
         continue-on-error: true
         timeout-minutes: 340
         run: |
