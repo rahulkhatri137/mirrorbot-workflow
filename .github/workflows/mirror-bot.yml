@@ -32,7 +32,6 @@ jobs:
       - name: Compile Docker
         run: |
           cd source || exit 1
-          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
           docker container prune --force || true
           docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfile -t mirror-bot
 
