@@ -2,8 +2,6 @@ name: MirrorBot Environment
 
 on:
   push:
-    branches: [ main ]
-    paths-ignore: 'README.md'
   workflow_dispatch:
    
 env:
@@ -23,11 +21,10 @@ jobs:
           git config --global user.email ${GitHubMail}
           git config --global user.name ${GitHubName}
           git config --global credential.helper store
-          echo "https://${GitHubName}:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
 
       - name: Clone Mirror Repo
         run: |
-          git clone https://${GitHubName}:${{ secrets.GH_TOKEN }}@github.com/${{ secrets.REPO }} source
+          git clone @github.com/${{ secrets.REPO }} source
 
       - name: Compile Docker
         run: |
@@ -40,15 +37,3 @@ jobs:
         timeout-minutes: 340
         run: |
           docker run --privileged --rm -i mirror-bot
-
-      - name: Loop Workflow
-        continue-on-error: true
-        run: |
-          # ${GITHUB_REPOSITORY} is the repo slug which runs this script
-          git clone https://${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY} loop
-          cd loop || exit 1
-          echo $(( RANDOM - ( RANDOM % RANDOM ) )) > loop.txt
-          git add loop.txt
-          git commit -m "Workflow : Loop"
-          git push -q https://${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY} HEAD:main
-
