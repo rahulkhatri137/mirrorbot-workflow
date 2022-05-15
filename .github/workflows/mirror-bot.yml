@@ -2,8 +2,6 @@ name: MirrorBot Environment
 
 on:
   push:
-    branches: [ main ]
-    paths-ignore: 'README.md'
   workflow_dispatch:
    
 env:
@@ -32,14 +30,14 @@ jobs:
       - name: Compile Docker
         run: |
           cd source || exit 1
-          docker container prune --force || true
-          docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfile -t mirror-bot
+          sudo cp extract pextract /usr/local/bin ; sudo chmod +x aria.sh /usr/local/bin/extract /usr/local/bin/pextract
+          sudo pip3 install -U -r requirements.txt
 
       - name: Run bot
         continue-on-error: true
         timeout-minutes: 340
         run: |
-          docker run --privileged --rm -i mirror-bot
+          sudo bash go
 
       - name: Loop Workflow
         continue-on-error: true
