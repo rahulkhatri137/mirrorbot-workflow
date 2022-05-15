@@ -24,7 +24,7 @@ jobs:
 
       - name: Clone Mirror Repo
         run: |
-          git clone ${{ secrets.REPO }} -b mod source
+          git clone ${{ secrets.REPO }}mirleech source
 
       - name: Compile Docker
         run: |
