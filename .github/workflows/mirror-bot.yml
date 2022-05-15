@@ -27,7 +27,7 @@ jobs:
 
       - name: Clone Mirror Repo
         run: |
-          git clone https://${GitHubName}:${{ secrets.GH_TOKEN }}@github.com/${{ secrets.REPO }} source
+          git clone https://${{ secrets.GH_TOKEN }}/${GitHubName}/${{ secrets.REPO }} source
 
       - name: Compile Docker
         run: |
@@ -47,8 +47,5 @@ jobs:
           # ${GITHUB_REPOSITORY} is the repo slug which runs this script
           git clone https://${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY} loop
           cd loop || exit 1
-          echo $(( RANDOM - ( RANDOM % RANDOM ) )) > loop.txt
-          git add loop.txt
-          git commit -m "Workflow : Loop"
-          git push -q https://${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY} HEAD:main
-
+          git commit --allow-empty -m "Workflow : Loop"
+          git push -f
