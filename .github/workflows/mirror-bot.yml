@@ -27,7 +27,7 @@ jobs:
 
       - name: Clone Mirror Repo
         run: |
-          git clone https://${{ secrets.GH_TOKEN }}/${GitHubName}/${{ secrets.REPO }} source
+          git clone https://${{ secrets.GH_TOKEN }}@github.com/${GitHubName}/${{ secrets.REPO }} source
 
       - name: Compile Docker
         run: |
