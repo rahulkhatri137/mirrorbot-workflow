@@ -10,19 +10,14 @@ env:
 
 jobs:
   debug:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@main
 
-      - name: Cleanup workspace
-        run: |
-          docker rmi `docker images -q`
-          sudo rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d
-          sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox* google* dotnet* powershell openjdk* php*
-          sudo -E apt-get -y autoremove --purge
-          sudo -E apt-get clean
+      # Cleanup The Actions Workspace Using Custom Composite Run Actions
+      - uses: rokibhasansagar/slimhub_actions@main
 
       - name: Set Git Configs & Secrets
         run: |
